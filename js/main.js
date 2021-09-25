@@ -14,15 +14,13 @@ function getRandomIntInclusive(min, max) {
 getRandomIntInclusive(0, 83);
 
 
-const MAX_LINE = 140;
+function checkMaxStringLength(verifiedString, maxLine) {
 
-function checkMaxStringLength(verifiedString) {
-
-  if (verifiedString <= MAX_LINE) {
+  if (verifiedString.length <= maxLine) {
     return true;
   }
 
   return false;
 }
 
-checkMaxStringLength(25);
+checkMaxStringLength('moyastroka', 100);
