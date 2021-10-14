@@ -74,8 +74,8 @@ const commentId = [];
 while (commentId.length < 26) {
   const randomNumber = Math.ceil(Math.random() * 1000);
   let found = false;
-  for (let num = 0; num < commentId.length; num++) {
-    if (commentId[num] === randomNumber){
+  for (let i = 0; i < commentId.length; i++) {
+    if (commentId[i] === randomNumber){
       found = true;
       break;
     }
@@ -84,10 +84,10 @@ while (commentId.length < 26) {
 }
 
 const comments = [];
-for (let num = 0; comments.length < 26; num++){
+for (let i = 0; comments.length < 26; i++){
 
   const comment = {
-    id:(commentId[num]),
+    id:(commentId[i]),
     avatar:(`img/avatar-${getRandomIntInclusive (1,6)}.svg`),
     message:(PROPOSAL[getRandomIntInclusive(0, PROPOSAL.length-1)]),
     name:(NAMES[getRandomIntInclusive(0, NAMES.length-1)]),
@@ -97,13 +97,13 @@ for (let num = 0; comments.length < 26; num++){
 }
 
 const userPosts = [];
-for (let num = 1; userPosts.length < 25; num++){
+for (let i = 1; userPosts.length < 25; i++){
   const userPost = {
-    id:(num),
-    url:(`photos/${(num)}.jpg`),
-    description:(PHOTO_DESCRIPTION[num]),
+    id:(i),
+    url:(`photos/${(i)}.jpg`),
+    description:(PHOTO_DESCRIPTION[i]),
     likes:(getRandomIntInclusive (15,200)),
-    comments:(comments[num]),
+    comments:(comments[i]),
   };
   userPosts.push (userPost);
 }
