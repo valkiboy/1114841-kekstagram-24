@@ -12,7 +12,7 @@ const miniPictureFragment = document.createDocumentFragment();
 createMiniPicture.forEach(({url, comments, likes}) => {
   const copyPictureTemplate = templatePicture.cloneNode(true);
   copyPictureTemplate.querySelector('.picture__img').src = url;
-  copyPictureTemplate.querySelector('.picture__comments').textContent = comments;
+  copyPictureTemplate.querySelector('.picture__comments').textContent = comments.length;
   copyPictureTemplate.querySelector('.picture__likes').textContent = likes;
   miniPictureFragment.appendChild(copyPictureTemplate);
 });

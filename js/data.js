@@ -83,27 +83,41 @@ while (commentId.length < 26) {
   if (!found) { commentId[commentId.length]=randomNumber; }
 }
 
-const comments = [];
-for (let i = 0; comments.length < 26; i++){
+// const comments = [];
+// for (let i = 0; comments.length < 26; i++){
 
-  const comment = {
-    id:(commentId[i]),
-    avatar:(`img/avatar-${getRandomIntInclusive (1,6)}.svg`),
-    message:(PROPOSAL[getRandomIntInclusive(0, PROPOSAL.length-1)]),
-    name:(NAMES[getRandomIntInclusive(0, NAMES.length-1)]),
-  };
+//   const comment = {
+//     id:(commentId[i]),
+//     avatar:(`img/avatar-${getRandomIntInclusive (1,6)}.svg`),
+//     message:(PROPOSAL[getRandomIntInclusive(0, PROPOSAL.length-1)]),
+//     name:(NAMES[getRandomIntInclusive(0, NAMES.length-1)]),
+//   };
 
-  comments.push (comment);
-}
+//   comments.push (comment);
+// }
 
 const userPosts = [];
 for (let i = 1; userPosts.length < 25; i++){
+
+  const comments = [];
+  for (let j = 0; comments.length < 26; j++){
+
+    const comment = {
+      id:(commentId[j]),
+      avatar:(`img/avatar-${getRandomIntInclusive (1,6)}.svg`),
+      message:(PROPOSAL[getRandomIntInclusive(0, PROPOSAL.length-1)]),
+      name:(NAMES[getRandomIntInclusive(0, NAMES.length-1)]),
+    };
+
+    comments.push (comment);
+  }
+
   const userPost = {
     id:(i),
     url:(`photos/${(i)}.jpg`),
     description:(PHOTO_DESCRIPTION[i]),
     likes:(getRandomIntInclusive (15,200)),
-    comments:(comments[i]),
+    comments:[comments[i]],
   };
   userPosts.push (userPost);
 }
