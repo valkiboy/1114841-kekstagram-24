@@ -10,7 +10,7 @@ const createMiniPicture = userPosts;
 
 const miniPictureFragment = document.createDocumentFragment();
 
-createMiniPicture.forEach(({url, comments, likes}) => {
+createMiniPicture.forEach(({id, url, comments, likes}) => {
   const copyPictureTemplate = templatePicture.cloneNode(true);
   copyPictureTemplate.querySelector('.picture__img').src = url;
   copyPictureTemplate.querySelector('.picture__comments').textContent = comments.length;
@@ -18,10 +18,10 @@ createMiniPicture.forEach(({url, comments, likes}) => {
   miniPictureFragment.appendChild(copyPictureTemplate);
 
   copyPictureTemplate.addEventListener('click',() => {
-    getBigPicture ();
+    getBigPicture (id);
   });
 });
 
 miniPictures.appendChild(miniPictureFragment);
 
-
+export {createMiniPicture};
