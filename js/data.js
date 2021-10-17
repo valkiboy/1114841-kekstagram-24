@@ -70,30 +70,17 @@ const PHOTO_DESCRIPTION = [
 // const message = PROPOSAL[getRandomIntInclusive(0, PROPOSAL.length-1)];
 // const avatar = `img/avatar-${getRandomIntInclusive (1,6)}.svg`;
 
-const commentId = [];
-while (commentId.length < 26) {
-  const randomNumber = Math.ceil(Math.random() * 1000);
-  let found = false;
-  for (let i = 0; i < commentId.length; i++) {
-    if (commentId[i] === randomNumber){
-      found = true;
-      break;
-    }
-  }
-  if (!found) { commentId[commentId.length]=randomNumber; }
-}
-
-// const comments = [];
-// for (let i = 0; comments.length < 26; i++){
-
-//   const comment = {
-//     id:(commentId[i]),
-//     avatar:(`img/avatar-${getRandomIntInclusive (1,6)}.svg`),
-//     message:(PROPOSAL[getRandomIntInclusive(0, PROPOSAL.length-1)]),
-//     name:(NAMES[getRandomIntInclusive(0, NAMES.length-1)]),
-//   };
-
-//   comments.push (comment);
+// const commentId = [];
+// while (commentId.length < 26) {
+//   const randomNumber = Math.ceil(Math.random() * 1000);
+//   let found = false;
+//   for (let i = 0; i < commentId.length; i++) {
+//     if (commentId[i] === randomNumber){
+//       found = true;
+//       break;
+//     }
+//   }
+//   if (!found) { commentId[commentId.length]=randomNumber; }
 // }
 
 const userPosts = [];
@@ -101,6 +88,19 @@ for (let i = 1; userPosts.length < 25; i++){
 
   const comments = [];
   for (let j = 0; comments.length < 26; j++){
+
+    const commentId = [];
+    while (commentId.length < 26) {
+      const randomNumber = Math.ceil(Math.random() * 1000);
+      let found = false;
+      for (let num = 0; num < commentId.length; num++) {
+        if (commentId[num] === randomNumber){
+          found = true;
+          break;
+        }
+      }
+      if (!found) { commentId[commentId.length]=randomNumber; }
+    }
 
     const comment = {
       id:(commentId[j]),
@@ -117,7 +117,7 @@ for (let i = 1; userPosts.length < 25; i++){
     url:(`photos/${(i)}.jpg`),
     description:(PHOTO_DESCRIPTION[i]),
     likes:(getRandomIntInclusive (15,200)),
-    comments:[comments[i]],
+    comments:comments,
   };
   userPosts.push (userPost);
 }

@@ -1,4 +1,5 @@
 import './data.js';
-import './picture.js';
+import './mini-pictures.js';
+// import './big-picture.js';
 // import {userPosts} from './data.js';
 // console.log(userPosts);
