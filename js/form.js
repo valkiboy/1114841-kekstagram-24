@@ -5,8 +5,9 @@ const imgUploadOverlay = document.querySelector('.img-upload__overlay');
 const imgUploadCancel = document.querySelector('.img-upload__cancel');
 const textHashtags = document.querySelector('.text__hashtags');
 const textDescription = document.querySelector('.text__description');
-const textHashtagsValue = textHashtags.value;
-const lowerCaseTextHashtagsValue = textHashtagsValue.toLowerCase().replace(/\s+/g,' '); //Переводим строку в нижний регистр и убираем лишние пробелы
+//const textHashtagsValue = textHashtags.value; безполезная штука)))
+//const lowerCaseTextHashtagsValue = textHashtagsValue.toLowerCase().replace(/\s+/g,' '); //Переводим строку в нижний регистр и убираем лишние пробелы
+//выше тоже не нужно т.к. инпут будет пустой, нужно слушать ввод данных
 // const hashtagsLength = /^#{1,19}$/;
 // const hashtagsArray = textHashtagsInput.split(' ');
 const re = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
@@ -14,6 +15,30 @@ re.test('#хэштег'); /* true */
 re.test('#'); /* false */
 re.test('хэштег'); /* false */
 re.test('#хэштегДлиннее20символов'); /* false */
+
+const hasDuplicates = (array) => {
+  return (new Set(array)).size !== array.length;
+};
+
+const checkValidity = () => {
+  textHashtags.value = textHashtags.value.replace(/\s+/g, ' ');
+  const hashArray = textHashtags.value.toLowerCase().split(' ');
+
+  console.log(hashArray);
+
+  hashArray.forEach((hash) => {
+    if(hash.length > 5) {
+      textHashtags.setCustomValidity('хеш-тег должен начинаться с решётки #');
+    } else {
+      textHashtags.setCustomValidity('');
+    }
+
+  });
+
+    textHashtags.reportValidity();
+};
+
+textHashtags.addEventListener('input', checkValidity);
 
 // textHashtags.addEventListener('input', () =>{
 
@@ -27,7 +52,7 @@ re.test('#хэштегДлиннее20символов'); /* false */
 
 //Функция создания массива из строки с заданным разделителем
 
-const hashtagsArray = [];
+/*const hashtagsArray = [];
 
 function splitString(stringToSplit, separator) {
   const arrayOfStrings = stringToSplit.split(separator);
@@ -35,29 +60,22 @@ function splitString(stringToSplit, separator) {
   hashtagsArray.push(arrayOfStrings);
 }
 
-splitString(lowerCaseTextHashtagsValue, ' ');
+splitString(lowerCaseTextHashtagsValue, ' ');*/
 // console.log(hashtagsArray);
 
-hashtagsArray.forEach((item) => {
-  console.log(item)
+//hashtagsArray.forEach((item) => {
+  //console.log(item)
   // if (!item.startsWith('#')) {
   //   textHashtags.setCustomValidity('Хештег должен начинаться с #');
   // } else {
   //   textHashtags.setCustomValidity('');
   // }
   // textHashtags.reportValidity();
-});
+//});
 
 //Функция для поиска дубликата
 
-function hasDuplicates(array) {
-  return (new Set(array)).size !== array.length;
-}
 
-hasDuplicates(hashtagsArray);
-
-
-console.log(hashtagsArray);
 
 function onPhotoEditingEscKeydown () {
   document.addEventListener('keydown', (evt) => {
