@@ -22,4 +22,10 @@ function checkMaxStringLength(verifiedString, maxLine) {
 
 checkMaxStringLength('moyastroka', 100);
 
-export {getRandomIntInclusive};
+function isEscapeKey (evt) {
+  if (evt.key === 'Escape') {
+    return true;
+  }
+}
+
+export {getRandomIntInclusive, isEscapeKey, checkMaxStringLength};
