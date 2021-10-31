@@ -17,6 +17,16 @@ function hasDuplicates(array) {
   return (new Set(array)).size !== array.length;
 }
 
+// if (hashtag.length === 0) {
+//   textHashtags.value.trim();
+//   textHashtags.setCustomValidity('');
+// } else
+
+// if (hashtagsArray[0] === '') {
+//   textHashtags.value = textHashtags.value.trim();
+//   textHashtags.setCustomValidity('');
+// } else
+
 // Функция валидации хештегов
 
 function checkHashtagsValidity() {
@@ -24,7 +34,10 @@ function checkHashtagsValidity() {
   const hashtagsArray = textHashtags.value.toLowerCase().split(' '); //Переводим строку в нижний регистр и создаем массив разделением строки пробелами
 
   hashtagsArray.forEach((hashtag) => {
-    if (!hashtag.startsWith('#')) {
+    if (hashtagsArray[0] === '') {
+      textHashtags.value = textHashtags.value.trim();
+      textHashtags.setCustomValidity('');
+    } else if (!hashtag.startsWith('#')) {
       textHashtags.setCustomValidity('хеш-тег должен начинаться с решётки #');
     } else if (hashtag === '#'){
       textHashtags.setCustomValidity('хеш-тег не может состоять только из одной решётки #');
