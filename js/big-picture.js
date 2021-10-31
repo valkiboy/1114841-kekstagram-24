@@ -57,18 +57,7 @@ function getBigPicture (item) {
       bigPicture.querySelector('.comments-count').textContent = comments.length;
       bigPicture.querySelector('.social__caption').textContent = description;
 
-      // const socialCommentFragment = document.createDocumentFragment();
-      // for (let i =0; i < 5; i++) {
-      //   const copySocialComment = socialComment.cloneNode(true);
-
-      //   copySocialComment.querySelector('.social__picture').src = comments.avatar;
-      //   copySocialComment.querySelector('.social__picture').alt = comments.name;
-      //   copySocialComment.querySelector('.social__text').textContent = comments.message;
-      //   socialCommentFragment.appendChild(copySocialComment);
-      // }
       openBigPictureModal ();
-      // socialComments.appendChild(socialCommentFragment);
-      // console.log(item);
       // console.log(item);
     }
   });
