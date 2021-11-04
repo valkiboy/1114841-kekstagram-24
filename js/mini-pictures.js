@@ -24,7 +24,6 @@ createMiniPicture.forEach(({url, comments, likes}) => {
     if (evt.target.closest('.picture')) {
       evt.preventDefault();
       const pictureImg = evt.target.closest('.picture').querySelector('.picture__img').src = url;
-      // console.log(pictureImg);
       getBigPicture (pictureImg);
     }
   });
