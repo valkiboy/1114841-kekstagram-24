@@ -17,16 +17,6 @@ function hasDuplicates(array) {
   return (new Set(array)).size !== array.length;
 }
 
-// if (hashtag.length === 0) {
-//   textHashtags.value.trim();
-//   textHashtags.setCustomValidity('');
-// } else
-
-// if (hashtagsArray[0] === '') {
-//   textHashtags.value = textHashtags.value.trim();
-//   textHashtags.setCustomValidity('');
-// } else
-
 // Функция валидации хештегов
 
 function checkHashtagsValidity() {
@@ -54,7 +44,6 @@ function checkHashtagsValidity() {
     }
   });
 
-  // console.log(hashtagsArray);
   textHashtags.reportValidity();
 }
 
@@ -107,13 +96,3 @@ function closePhotoEditing() {
 }
 
 imageUploadInput.addEventListener('change',openPhotoEditing);
-
-
-// Хэш-теги:
-
-// строка после решётки должна состоять из букв и чисел и не может содержать пробелы,
-
-// Комментарий:
-
-// ===длина комментария не может составлять больше 140 символов;===
-
