@@ -1,5 +1,8 @@
 import {isEscapeKey} from './util.js';
 import {checkMaxStringLength} from './util.js';
+import {onBiggerImg} from './filters-effect.js';
+import {onSmallerImg} from './filters-effect.js';
+import {resetPhotoEffect} from './filters-effect.js';
 
 const imageUploadInput = document.querySelector('.img-upload__input');
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
@@ -10,6 +13,9 @@ const MAX_COMMENT_LENGTH = 140;
 const MAX_HASHTAG_LENGTH = 20;
 const MAX_HASHTAG_ARRAY_LENGTH = 5;
 const re = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
+
+const controlSmaller = document.querySelector('.scale__control--smaller');
+const controlBigger = document.querySelector('.scale__control--bigger');
 
 //Функция для поиска дубликата
 
@@ -83,6 +89,9 @@ function openPhotoEditing () {
   document.body.classList.add('modal-open');
   document.addEventListener('keydown',onPhotoEditingEscKeydown);
   imgUploadCancel.addEventListener('click', onUploadCancelClick);
+  controlBigger.addEventListener('click', onBiggerImg);
+  controlSmaller.addEventListener('click', onSmallerImg);
+  resetPhotoEffect ();
 }
 
 //Функция закрытия редактора фото
@@ -93,6 +102,9 @@ function closePhotoEditing() {
   imageUploadInput.value = '';
   document.removeEventListener('keydown',onPhotoEditingEscKeydown);
   imgUploadCancel.removeEventListener('click', onUploadCancelClick);
+  controlBigger.removeEventListener('click', onBiggerImg);
+  controlSmaller.removeEventListener('click', onSmallerImg);
+  // resetPhotoEffect ();
 }
 
 imageUploadInput.addEventListener('change',openPhotoEditing);
