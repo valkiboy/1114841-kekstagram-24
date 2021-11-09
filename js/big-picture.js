@@ -1,8 +1,6 @@
-import {userPosts} from './data.js';
 import {isEscapeKey} from './util.js';
 
 const bigPicture = document.querySelector('.big-picture');
-const createBigPicture = userPosts;
 const bigPictureCancel = document.querySelector('.big-picture__cancel');
 const bigPictureImg = bigPicture.querySelector('.big-picture__img');
 const likesCount = bigPicture.querySelector('.likes-count');
@@ -14,7 +12,7 @@ const commentCurrentCount = bigPicture.querySelector('.comments-current-count');
 const commentLoaderButton = bigPicture.querySelector('.social__comments-loader');
 const COMMENT_ON_PAGE = 5;
 
-function getBigPicture (item) {
+function getBigPicture (item, data) {
 
   let pageNum = 0;
   let postData;
@@ -97,7 +95,8 @@ function getBigPicture (item) {
 
   //Функция создания определенного большого фото по src
 
-  createBigPicture.forEach((post) => {
+
+  data.forEach((post) => {
     if ( post.url === item) {
       bigPictureImg.querySelector('img').src = post.url;
       likesCount.textContent = post.likes;
@@ -111,8 +110,6 @@ function getBigPicture (item) {
       openBigPictureModal ();
     }
   });
-
-
 }
 
 export {getBigPicture};
