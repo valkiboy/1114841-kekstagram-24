@@ -170,8 +170,11 @@ function resetPhotoEffect () {
   controlValue = '100';
   uploadPreviewImg.className = '';
   uploadPreviewImg.style.filter = '';
+}
+
+function getHideSlider () {
   sliderElement.style.display = 'none';
   scaleControlValue.value = `${controlValue}%`;
 }
 
-export {onSmallerImg, onBiggerImg, resetPhotoEffect};
+export {onSmallerImg, onBiggerImg, resetPhotoEffect, getHideSlider};

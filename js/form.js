@@ -1,12 +1,11 @@
-import {isEscapeKey} from './util.js';
-import {checkMaxStringLength} from './util.js';
-import {onBiggerImg} from './filters-effect.js';
-import {onSmallerImg} from './filters-effect.js';
-import {resetPhotoEffect} from './filters-effect.js';
+import {isEscapeKey, checkMaxStringLength, dataPostSuccess, dataPostError} from './util.js';
+import {onBiggerImg, onSmallerImg, resetPhotoEffect, getHideSlider} from './filters-effect.js';
+import {sendData} from './api.js';
 
 const imageUploadInput = document.querySelector('.img-upload__input');
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
 const imgUploadCancel = document.querySelector('.img-upload__cancel');
+const imgUploadForm = document.querySelector('.img-upload__form');
 const textHashtags = document.querySelector('.text__hashtags');
 const textDescription = document.querySelector('.text__description');
 const MAX_COMMENT_LENGTH = 140;
@@ -91,7 +90,8 @@ function openPhotoEditing () {
   imgUploadCancel.addEventListener('click', onUploadCancelClick);
   controlBigger.addEventListener('click', onBiggerImg);
   controlSmaller.addEventListener('click', onSmallerImg);
-  resetPhotoEffect ();
+  imgUploadForm.addEventListener('submit', onFormSubmit);
+  getHideSlider ();
 }
 
 //Функция закрытия редактора фото
@@ -99,12 +99,28 @@ function openPhotoEditing () {
 function closePhotoEditing() {
   imgUploadOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
+  imgUploadForm.reset();
   imageUploadInput.value = '';
+  textHashtags.value = '';
+  textDescription.value = '';
   document.removeEventListener('keydown',onPhotoEditingEscKeydown);
   imgUploadCancel.removeEventListener('click', onUploadCancelClick);
   controlBigger.removeEventListener('click', onBiggerImg);
   controlSmaller.removeEventListener('click', onSmallerImg);
-  // resetPhotoEffect ();
+  imgUploadForm.removeEventListener('submit', onFormSubmit);
+  resetPhotoEffect ();
 }
 
 imageUploadInput.addEventListener('change',openPhotoEditing);
+
+function onFormSubmit(evt) {
+  evt.preventDefault();
+
+  sendData(
+    () => dataPostSuccess(),
+    () => dataPostError(),
+    new FormData(evt.target),
+  );
+}
+
+export {closePhotoEditing};
