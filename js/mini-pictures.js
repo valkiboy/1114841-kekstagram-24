@@ -1,5 +1,4 @@
 import {getBigPicture} from './big-picture.js';
-import {getData} from './api.js';
 
 const templatePicture = document.querySelector('#picture')
   .content
@@ -29,10 +28,7 @@ function getMiniPictures (data) {
       }
     });
   });
-
   miniPictures.appendChild(miniPictureFragment);
 }
-
-getData (getMiniPictures);
 
 export {getMiniPictures};

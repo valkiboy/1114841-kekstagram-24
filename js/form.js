@@ -32,20 +32,28 @@ function checkHashtagsValidity() {
     if (hashtagsArray[0] === '') {
       textHashtags.value = textHashtags.value.trim();
       textHashtags.setCustomValidity('');
+      textHashtags.classList.remove('text__hashtags--error');
     } else if (!hashtag.startsWith('#')) {
       textHashtags.setCustomValidity('хеш-тег должен начинаться с решётки #');
+      textHashtags.classList.add('text__hashtags--error');
     } else if (hashtag === '#'){
       textHashtags.setCustomValidity('хеш-тег не может состоять только из одной решётки #');
+      textHashtags.classList.add('text__hashtags--error');
     } else if (hashtag.length > MAX_HASHTAG_LENGTH){
       textHashtags.setCustomValidity('максимальная длина одного хэш-тега 20 символов, включая решётку #');
+      textHashtags.classList.add('text__hashtags--error');
     } else if (!re.test(hashtag)){
       textHashtags.setCustomValidity('хеш-тег не может содержать пробелы, спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д.;');
+      textHashtags.classList.add('text__hashtags--error');
     } else if (hashtagsArray.length > MAX_HASHTAG_ARRAY_LENGTH){
       textHashtags.setCustomValidity('нельзя указать больше пяти хэш-тегов');
+      textHashtags.classList.add('text__hashtags--error');
     } else if (hasDuplicates(hashtagsArray)){
       textHashtags.setCustomValidity('один и тот же хэш-тег не может быть использован дважды');
+      textHashtags.classList.add('text__hashtags--error');
     } else {
       textHashtags.setCustomValidity('');
+      textHashtags.classList.remove('text__hashtags--error');
     }
   });
 
@@ -58,8 +66,10 @@ function checkDescriptionValidity () {
 
   if (!checkMaxStringLength(textDescription.value, MAX_COMMENT_LENGTH)) {
     textDescription.setCustomValidity('длина комментария не может составлять больше 140 символов');
+    textDescription.classList.add('text__description--error');
   } else {
     textDescription.setCustomValidity('');
+    textDescription.classList.remove('text__description--error');
   }
   textDescription.reportValidity();
 }
