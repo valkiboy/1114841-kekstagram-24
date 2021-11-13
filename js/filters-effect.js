@@ -1,7 +1,5 @@
 // Константы для изменения масштаба фото
 
-// const controlSmaller = document.querySelector('.scale__control--smaller');
-// const controlBigger = document.querySelector('.scale__control--bigger');
 const scaleControlValue = document.querySelector('.scale__control--value');
 const uploadPreviewImg = document.querySelector('.img-upload__preview img');
 
