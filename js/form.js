@@ -3,6 +3,8 @@ import {onBiggerImg, onSmallerImg, resetPhotoEffect, getHideSlider} from './filt
 import {sendData} from './api.js';
 
 const imageUploadInput = document.querySelector('.img-upload__input');
+const imgUploadPreview = document.querySelector('.img-upload__preview');
+const preview = imgUploadPreview.querySelector('img');
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
 const imgUploadCancel = document.querySelector('.img-upload__cancel');
 const imgUploadForm = document.querySelector('.img-upload__form');
@@ -121,7 +123,11 @@ function closePhotoEditing() {
   resetPhotoEffect ();
 }
 
-imageUploadInput.addEventListener('change',openPhotoEditing);
+imageUploadInput.addEventListener('change',() => {
+  openPhotoEditing();
+  const file = imageUploadInput.files[0];
+  preview.src = URL.createObjectURL(file);
+});
 
 function onFormSubmit(evt) {
   evt.preventDefault();
