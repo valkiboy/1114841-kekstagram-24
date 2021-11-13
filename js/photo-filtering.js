@@ -7,7 +7,6 @@ const MAX_RANDOM_PHOTO = 10;
 const filterDefault = document.getElementById('filter-default');
 const filterRandom = document.getElementById('filter-random');
 const filterDiscussed = document.getElementById('filter-discussed');
-const RERENDER_DELAY = 500;
 let newData;
 
 getData (getPhotoFiltering);
@@ -24,22 +23,16 @@ function getPhotoFiltering (data) {
     });
   }
 
-  // Этот код раскоментить
-
-  function getDefault() {
+  function onDefault () {
+    filterDefault.classList.add('img-filters__button--active');
+    filterRandom.classList.remove('img-filters__button--active');
+    filterDiscussed.classList.remove('img-filters__button--active');
     erasePhotos ();
     getData(getMiniPictures);
   }
 
-  function onDefault (callback) {
-    filterDefault.classList.add('img-filters__button--active');
-    filterRandom.classList.remove('img-filters__button--active');
-    filterDiscussed.classList.remove('img-filters__button--active');
-    callback();
-  }
 
-
-  function getRandom () {
+  function onRandom () {
     erasePhotos ();
     function shuffle(array) {
       let currentIndex = array.length, temporaryValue, randomIndex;
@@ -72,7 +65,7 @@ function getPhotoFiltering (data) {
     return b-a;
   }
 
-  function getDiscussed () {
+  function onDiscussed () {
     erasePhotos ();
     data.sort(getSort);
     getMiniPictures(data);
@@ -81,15 +74,7 @@ function getPhotoFiltering (data) {
     filterDiscussed.classList.add('img-filters__button--active');
   }
 
-
-  filterDefault.addEventListener('click', () => {
-    onDefault( debounce(() =>
-      getDefault(),
-    RERENDER_DELAY,
-    ));
-  });
-
-
-  filterRandom.addEventListener('click',getRandom);
-  filterDiscussed.addEventListener('click',getDiscussed);
+  filterDefault.addEventListener('click', debounce(onDefault));
+  filterRandom.addEventListener('click',debounce(onRandom));
+  filterDiscussed.addEventListener('click',debounce(onDiscussed));
 }
