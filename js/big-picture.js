@@ -1,5 +1,6 @@
 import {isEscapeKey} from './util.js';
 
+const COMMENT_ON_PAGE = 5;
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureCancel = document.querySelector('.big-picture__cancel');
 const bigPictureImg = bigPicture.querySelector('.big-picture__img');
@@ -10,9 +11,8 @@ const socialComments = bigPicture.querySelector('.social__comments');
 const socialComment = bigPicture.querySelector('.social__comment');
 const commentCurrentCount = bigPicture.querySelector('.comments-current-count');
 const commentLoaderButton = bigPicture.querySelector('.social__comments-loader');
-const COMMENT_ON_PAGE = 5;
 
-function getBigPicture (item, data) {
+function getBigPicture(item, data) {
 
   let pageNum = 0;
   let postData;
@@ -28,13 +28,13 @@ function getBigPicture (item, data) {
 
   //Функция  для закрытия полноразмерного фото при нажатии на кнопк закрытия (крестик)
 
-  function onCloseButtonClick () {
-    closeBigPictureModal ();
+  function onCloseButtonClick() {
+    closeBigPictureModal();
   }
 
   //Функция открытия полноразмерного фото и добавления ЭвентЛисенеров для кнопки закрытия и ESCAPE
 
-  function openBigPictureModal () {
+  function openBigPictureModal() {
     bigPicture.classList.remove('hidden');
     document.body.classList.add('modal-open');
     document.addEventListener('keydown',onBigPictureEscKeydown);
@@ -83,7 +83,7 @@ function getBigPicture (item, data) {
 
   //Функция закрытия полноразмерного фото и удаления ЭвентЛисенеров для кнопки закрытия и ESCAPE
 
-  function closeBigPictureModal () {
+  function closeBigPictureModal() {
     bigPicture.classList.add('hidden');
     document.body.classList.remove('modal-open');
     document.removeEventListener('keydown',onBigPictureEscKeydown);
@@ -97,7 +97,7 @@ function getBigPicture (item, data) {
 
 
   data.forEach((post) => {
-    if ( post.url === item) {
+    if (post.url === item) {
       bigPictureImg.querySelector('img').src = post.url;
       likesCount.textContent = post.likes;
       commentsCount.textContent = post.comments.length;
@@ -106,8 +106,8 @@ function getBigPicture (item, data) {
       postData = post;
 
       commentLoaderButton.addEventListener('click', onGetNewComments);
-      getComments ();
-      openBigPictureModal ();
+      getComments();
+      openBigPictureModal();
     }
   });
 }
