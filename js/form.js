@@ -2,7 +2,7 @@ import {isEscapeKey, checkMaxStringLength, dataPostSuccess, dataPostError} from 
 import {onBiggerImg, onSmallerImg, resetPhotoEffect, getHideSlider} from './filters-effect.js';
 import {sendData} from './api.js';
 
-const imageUploadInput = document.querySelector('.img-upload__input');
+const imgUploadInput = document.querySelector('.img-upload__input');
 const imgUploadPreview = document.querySelector('.img-upload__preview');
 const preview = imgUploadPreview.querySelector('img');
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
@@ -20,8 +20,8 @@ const controlBigger = document.querySelector('.scale__control--bigger');
 
 //Функция для поиска дубликата
 
-function hasDuplicates(array) {
-  return (new Set(array)).size !== array.length;
+function hasDuplicates(data) {
+  return (new Set(data)).size !== data.length;
 }
 
 // Функция валидации хештегов
@@ -112,7 +112,7 @@ function closePhotoEditing() {
   imgUploadOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   imgUploadForm.reset();
-  imageUploadInput.value = '';
+  imgUploadInput.value = '';
   textHashtags.value = '';
   textDescription.value = '';
   document.removeEventListener('keydown',onPhotoEditingEscKeydown);
@@ -123,9 +123,9 @@ function closePhotoEditing() {
   resetPhotoEffect ();
 }
 
-imageUploadInput.addEventListener('change',() => {
+imgUploadInput.addEventListener('change',() => {
   openPhotoEditing();
-  const file = imageUploadInput.files[0];
+  const file = imgUploadInput.files[0];
   preview.src = URL.createObjectURL(file);
 });
 

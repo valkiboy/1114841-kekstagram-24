@@ -1,7 +1,7 @@
 // Константы для изменения масштаба фото
 
 const scaleControlValue = document.querySelector('.scale__control--value');
-const uploadPreviewImg = document.querySelector('.img-upload__preview img');
+const previewImg = document.querySelector('.img-upload__preview img');
 
 // Константы для изменеия эффектов
 
@@ -41,9 +41,9 @@ function getSmallerImg () {
 
 function getScalePhoto (value) {
   if (value >= 100) {
-    uploadPreviewImg.style.transform = 'scale(1.0)';
+    previewImg.style.transform = 'scale(1.0)';
   } else {
-    uploadPreviewImg.style.transform = `scale(0.${value})`;
+    previewImg.style.transform = `scale(0.${value})`;
   }
 }
 
@@ -74,21 +74,21 @@ noUiSlider.create(sliderElement, {
 function checkSlider(effect, symbol = '') {
   sliderElement.noUiSlider.on('update', (value, handle) => {
     effectLevelValue.value = value[handle];
-    uploadPreviewImg.style.filter = `${effect}(${value[handle]}${symbol})`;
+    previewImg.style.filter = `${effect}(${value[handle]}${symbol})`;
   });
 }
 
 function getChangePhoto (item) {
 
   if ( 'effect-none' === item ) {
-    uploadPreviewImg.className = 'effects__preview--none';
-    uploadPreviewImg.style.filter = '';
+    previewImg.className = 'effects__preview--none';
+    previewImg.style.filter = '';
     sliderElement.style.display = 'none';
 
   }
 
   if ( 'effect-chrome' === item ) {
-    uploadPreviewImg.className = 'effects__preview--chrome';
+    previewImg.className = 'effects__preview--chrome';
     sliderElement.style.display = 'block';
 
     sliderElement.noUiSlider.updateOptions({
@@ -103,7 +103,7 @@ function getChangePhoto (item) {
   }
 
   if ( 'effect-sepia' === item ) {
-    uploadPreviewImg.className = 'effects__preview--sepia';
+    previewImg.className = 'effects__preview--sepia';
     sliderElement.style.display = 'block';
 
     sliderElement.noUiSlider.updateOptions({
@@ -118,7 +118,7 @@ function getChangePhoto (item) {
   }
 
   if ( 'effect-marvin' === item ) {
-    uploadPreviewImg.className = 'effects__preview--marvin';
+    previewImg.className = 'effects__preview--marvin';
     sliderElement.style.display = 'block';
 
     sliderElement.noUiSlider.updateOptions({
@@ -133,7 +133,7 @@ function getChangePhoto (item) {
   }
 
   if ( 'effect-phobos' === item ) {
-    uploadPreviewImg.className = 'effects__preview--phobos';
+    previewImg.className = 'effects__preview--phobos';
     sliderElement.style.display = 'block';
 
     sliderElement.noUiSlider.updateOptions({
@@ -148,7 +148,7 @@ function getChangePhoto (item) {
   }
 
   if ( 'effect-heat' === item ) {
-    uploadPreviewImg.className = 'effects__preview--heat';
+    previewImg.className = 'effects__preview--heat';
     sliderElement.style.display = 'block';
 
     sliderElement.noUiSlider.updateOptions({
@@ -164,10 +164,10 @@ function getChangePhoto (item) {
 }
 
 function resetPhotoEffect () {
-  uploadPreviewImg.style.transform = 'scale(1.0)';
+  previewImg.style.transform = 'scale(1.0)';
   controlValue = '100';
-  uploadPreviewImg.className = '';
-  uploadPreviewImg.style.filter = '';
+  previewImg.className = '';
+  previewImg.style.filter = '';
 }
 
 function getHideSlider () {
