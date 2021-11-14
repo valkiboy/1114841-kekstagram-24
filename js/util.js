@@ -26,8 +26,6 @@ function checkMaxStringLength(verifiedString, maxLine) {
   return false;
 }
 
-checkMaxStringLength('moyastroka', 100);
-
 function isEscapeKey (evt) {
   if (evt.key === 'Escape') {
     return true;
@@ -99,5 +97,33 @@ function dataPostError() {
   closePhotoEditing();
 }
 
+function shuffle(items) {
+  let currentIndex = items.length, temporaryValue, randomIndex;
 
-export {getRandomIntInclusive, isEscapeKey, checkMaxStringLength, showAlert, dataPostSuccess, dataPostError};
+  while (0 !== currentIndex) {
+
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    temporaryValue = items[currentIndex];
+    items[currentIndex] = items[randomIndex];
+    items[randomIndex] = temporaryValue;
+  }
+
+  return items;
+}
+
+function erasePhotos () {
+  const pictureElem = document.querySelectorAll('.picture');
+  pictureElem.forEach((elem) => {
+    elem.remove();
+  });
+}
+
+function getSort (a, b) {
+  a = a.comments.length;
+  b = b.comments.length;
+  return b-a;
+}
+
+export {getRandomIntInclusive, isEscapeKey, checkMaxStringLength, showAlert, dataPostSuccess, dataPostError, shuffle, erasePhotos, getSort};
