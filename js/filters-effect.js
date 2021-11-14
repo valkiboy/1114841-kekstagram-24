@@ -1,3 +1,7 @@
+const SCALE_CONTROL_STEP = 25;
+const SCALE_CONTROL_MIN = 25;
+const SCALE_CONTROL_MAX = 100;
+
 // Константы для изменения масштаба фото
 
 const scaleControlValue = document.querySelector('.scale__control--value');
@@ -9,15 +13,11 @@ const sliderElement = document.querySelector('.effect-level__slider');
 const effectLevelValue = document.querySelector('.effect-level__value');
 const effectsList = document.querySelector('.effects__list');
 
-const SCALE_CONTROL_STEP = 25;
-const SCALE_CONTROL_MIN = 25;
-const SCALE_CONTROL_MAX = 100;
-
 let controlValue = scaleControlValue.value;
 
 //Функция увеличения фото
 
-function getBiggerImg () {
+function getBiggerImg() {
   if (controlValue < SCALE_CONTROL_MAX) {
     controlValue = controlValue + SCALE_CONTROL_STEP;
     getScalePhoto (controlValue);
@@ -29,7 +29,7 @@ function getBiggerImg () {
 
 // Функция уменьшения фото
 
-function getSmallerImg () {
+function getSmallerImg() {
   if (controlValue > SCALE_CONTROL_MIN) {
     controlValue = controlValue - SCALE_CONTROL_STEP;
     getScalePhoto (controlValue);
@@ -39,7 +39,7 @@ function getSmallerImg () {
   }
 }
 
-function getScalePhoto (value) {
+function getScalePhoto(value) {
   if (value >= 100) {
     previewImg.style.transform = 'scale(1.0)';
   } else {
@@ -47,11 +47,11 @@ function getScalePhoto (value) {
   }
 }
 
-function onSmallerImg () {
-  getSmallerImg ();
+function onSmallerImg() {
+  getSmallerImg();
 }
 
-function onBiggerImg () {
+function onBiggerImg() {
   getBiggerImg();
 }
 
@@ -78,16 +78,16 @@ function checkSlider(effect, symbol = '') {
   });
 }
 
-function getChangePhoto (item) {
+function getChangePhoto(item) {
 
-  if ( 'effect-none' === item ) {
+  if ('effect-none' === item) {
     previewImg.className = 'effects__preview--none';
     previewImg.style.filter = '';
     sliderElement.style.display = 'none';
 
   }
 
-  if ( 'effect-chrome' === item ) {
+  if ('effect-chrome' === item) {
     previewImg.className = 'effects__preview--chrome';
     sliderElement.style.display = 'block';
 
@@ -102,7 +102,7 @@ function getChangePhoto (item) {
     checkSlider('grayscale');
   }
 
-  if ( 'effect-sepia' === item ) {
+  if ('effect-sepia' === item) {
     previewImg.className = 'effects__preview--sepia';
     sliderElement.style.display = 'block';
 
@@ -117,7 +117,7 @@ function getChangePhoto (item) {
     checkSlider('sepia');
   }
 
-  if ( 'effect-marvin' === item ) {
+  if ('effect-marvin' === item) {
     previewImg.className = 'effects__preview--marvin';
     sliderElement.style.display = 'block';
 
@@ -132,7 +132,7 @@ function getChangePhoto (item) {
     checkSlider('invert', '%');
   }
 
-  if ( 'effect-phobos' === item ) {
+  if ('effect-phobos' === item) {
     previewImg.className = 'effects__preview--phobos';
     sliderElement.style.display = 'block';
 
@@ -147,7 +147,7 @@ function getChangePhoto (item) {
     checkSlider('blur', 'px');
   }
 
-  if ( 'effect-heat' === item ) {
+  if ('effect-heat' === item) {
     previewImg.className = 'effects__preview--heat';
     sliderElement.style.display = 'block';
 
@@ -163,14 +163,14 @@ function getChangePhoto (item) {
   }
 }
 
-function resetPhotoEffect () {
+function resetPhotoEffect() {
   previewImg.style.transform = 'scale(1.0)';
   controlValue = '100';
   previewImg.className = '';
   previewImg.style.filter = '';
 }
 
-function getHideSlider () {
+function getHideSlider() {
   sliderElement.style.display = 'none';
   scaleControlValue.value = `${controlValue}%`;
 }

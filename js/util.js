@@ -26,7 +26,7 @@ function checkMaxStringLength(verifiedString, maxLine) {
   return false;
 }
 
-function isEscapeKey (evt) {
+function isEscapeKey(evt) {
   if (evt.key === 'Escape') {
     return true;
   }
@@ -113,14 +113,14 @@ function shuffle(items) {
   return items;
 }
 
-function erasePhotos () {
+function erasePhotos() {
   const pictureElem = document.querySelectorAll('.picture');
   pictureElem.forEach((elem) => {
     elem.remove();
   });
 }
 
-function getSort (a, b) {
+function getSort(a, b) {
   a = a.comments.length;
   b = b.comments.length;
   return b-a;

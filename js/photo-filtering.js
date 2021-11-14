@@ -3,8 +3,8 @@ import {getMiniPictures} from './mini-pictures.js';
 import {debounce} from './utils/debounce.js';
 import {shuffle, erasePhotos, getSort} from './util.js';
 
-const imgFilters = document.querySelector('.img-filters');
 const MAX_RANDOM_PHOTO = 10;
+const imgFilters = document.querySelector('.img-filters');
 const filterDefault = document.getElementById('filter-default');
 const filterRandom = document.getElementById('filter-random');
 const filterDiscussed = document.getElementById('filter-discussed');
@@ -17,20 +17,20 @@ function getPhotoFiltering (data) {
   imgFilters.classList.remove('img-filters--inactive');
   getData(getMiniPictures);
 
-  function getDefault () {
+  function getDefault() {
     filterDefault.classList.add('img-filters__button--active');
     filterRandom.classList.remove('img-filters__button--active');
     filterDiscussed.classList.remove('img-filters__button--active');
-    erasePhotos ();
+    erasePhotos();
     getData(getMiniPictures);
   }
 
-  function onDefault () {
-    getDefault ();
+  function onDefault() {
+    getDefault();
   }
 
-  function getRandom () {
-    erasePhotos ();
+  function getRandom() {
+    erasePhotos();
     newData = shuffle(data);
     newData = newData.slice(0, MAX_RANDOM_PHOTO);
     getMiniPictures(newData);
@@ -39,12 +39,12 @@ function getPhotoFiltering (data) {
     filterDiscussed.classList.remove('img-filters__button--active');
   }
 
-  function onRandom () {
-    getRandom ();
+  function onRandom() {
+    getRandom();
   }
 
-  function getDiscussed () {
-    erasePhotos ();
+  function getDiscussed() {
+    erasePhotos();
     data.sort(getSort);
     getMiniPictures(data);
     filterDefault.classList.remove('img-filters__button--active');
@@ -52,8 +52,8 @@ function getPhotoFiltering (data) {
     filterDiscussed.classList.add('img-filters__button--active');
   }
 
-  function onDiscussed () {
-    getDiscussed ();
+  function onDiscussed() {
+    getDiscussed();
   }
 
   filterDefault.addEventListener('click', debounce(onDefault));

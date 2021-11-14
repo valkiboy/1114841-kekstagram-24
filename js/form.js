@@ -2,6 +2,10 @@ import {isEscapeKey, checkMaxStringLength, dataPostSuccess, dataPostError} from 
 import {onBiggerImg, onSmallerImg, resetPhotoEffect, getHideSlider} from './filters-effect.js';
 import {sendData} from './api.js';
 
+const MAX_COMMENT_LENGTH = 140;
+const MAX_HASHTAG_LENGTH = 20;
+const MAX_HASHTAG_ARRAY_LENGTH = 5;
+const REGEX = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
 const imgUploadInput = document.querySelector('.img-upload__input');
 const imgUploadPreview = document.querySelector('.img-upload__preview');
 const preview = imgUploadPreview.querySelector('img');
@@ -10,10 +14,6 @@ const imgUploadCancel = document.querySelector('.img-upload__cancel');
 const imgUploadForm = document.querySelector('.img-upload__form');
 const textHashtags = document.querySelector('.text__hashtags');
 const textDescription = document.querySelector('.text__description');
-const MAX_COMMENT_LENGTH = 140;
-const MAX_HASHTAG_LENGTH = 20;
-const MAX_HASHTAG_ARRAY_LENGTH = 5;
-const re = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
 
 const controlSmaller = document.querySelector('.scale__control--smaller');
 const controlBigger = document.querySelector('.scale__control--bigger');
@@ -44,7 +44,7 @@ function checkHashtagsValidity() {
     } else if (hashtag.length > MAX_HASHTAG_LENGTH){
       textHashtags.setCustomValidity('максимальная длина одного хэш-тега 20 символов, включая решётку #');
       textHashtags.classList.add('text__hashtags--error');
-    } else if (!re.test(hashtag)){
+    } else if (!REGEX.test(hashtag)){
       textHashtags.setCustomValidity('хеш-тег не может содержать пробелы, спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д.;');
       textHashtags.classList.add('text__hashtags--error');
     } else if (hashtagsArray.length > MAX_HASHTAG_ARRAY_LENGTH){
@@ -64,7 +64,7 @@ function checkHashtagsValidity() {
 
 // Функция валидации комментариев
 
-function checkDescriptionValidity () {
+function checkDescriptionValidity() {
 
   if (!checkMaxStringLength(textDescription.value, MAX_COMMENT_LENGTH)) {
     textDescription.setCustomValidity('длина комментария не может составлять больше 140 символов');
@@ -81,7 +81,7 @@ textDescription.addEventListener('input', checkDescriptionValidity);
 
 //Функция не дающая закрыть редактор фото при фокусе на хештегах и комментариях
 
-function onPhotoEditingEscKeydown (evt) {
+function onPhotoEditingEscKeydown(evt) {
   if (!evt.target.closest('.img-upload__text') && (isEscapeKey(evt))) {
     evt.preventDefault();
     closePhotoEditing();
@@ -89,13 +89,13 @@ function onPhotoEditingEscKeydown (evt) {
 }
 
 
-function onUploadCancelClick () {
+function onUploadCancelClick() {
   closePhotoEditing();
 }
 
 //Функция открытия редактора фото
 
-function openPhotoEditing () {
+function openPhotoEditing() {
   imgUploadOverlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
   document.addEventListener('keydown',onPhotoEditingEscKeydown);
@@ -103,7 +103,7 @@ function openPhotoEditing () {
   controlBigger.addEventListener('click', onBiggerImg);
   controlSmaller.addEventListener('click', onSmallerImg);
   imgUploadForm.addEventListener('submit', onFormSubmit);
-  getHideSlider ();
+  getHideSlider();
 }
 
 //Функция закрытия редактора фото
@@ -120,7 +120,7 @@ function closePhotoEditing() {
   controlBigger.removeEventListener('click', onBiggerImg);
   controlSmaller.removeEventListener('click', onSmallerImg);
   imgUploadForm.removeEventListener('submit', onFormSubmit);
-  resetPhotoEffect ();
+  resetPhotoEffect();
 }
 
 imgUploadInput.addEventListener('change',() => {
