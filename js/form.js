@@ -20,13 +20,11 @@ const controlBigger = document.querySelector('.scale__control--bigger');
 
 //Функция для поиска дубликата
 
-function hasDuplicates(data) {
-  return (new Set(data)).size !== data.length;
-}
+const hasDuplicates = (data) => (new Set(data)).size !== data.length;
 
 // Функция валидации хештегов
 
-function checkHashtagsValidity() {
+const checkHashtagsValidity = () => {
   textHashtags.value = textHashtags.value.replace(/\s+/g, ' '); //Убираем лишние пробелы
   const hashtagsArray = textHashtags.value.toLowerCase().split(' '); //Переводим строку в нижний регистр и создаем массив разделением строки пробелами
 
@@ -60,11 +58,11 @@ function checkHashtagsValidity() {
   });
 
   textHashtags.reportValidity();
-}
+};
 
 // Функция валидации комментариев
 
-function checkDescriptionValidity() {
+const checkDescriptionValidity = () => {
 
   if (!checkMaxStringLength(textDescription.value, MAX_COMMENT_LENGTH)) {
     textDescription.setCustomValidity('длина комментария не может составлять больше 140 символов');
@@ -74,28 +72,37 @@ function checkDescriptionValidity() {
     textDescription.classList.remove('text__description--error');
   }
   textDescription.reportValidity();
-}
+};
 
 textHashtags.addEventListener('input', checkHashtagsValidity);
 textDescription.addEventListener('input', checkDescriptionValidity);
 
 //Функция не дающая закрыть редактор фото при фокусе на хештегах и комментариях
 
-function onPhotoEditingEscKeydown(evt) {
+const onPhotoEditingEscKeydown = (evt) => {
   if (!evt.target.closest('.img-upload__text') && (isEscapeKey(evt))) {
     evt.preventDefault();
     closePhotoEditing();
   }
-}
+};
 
-
-function onUploadCancelClick() {
+const onUploadCancelClick = () => {
   closePhotoEditing();
-}
+};
+
+const onFormSubmit = (evt) => {
+  evt.preventDefault();
+
+  sendData(
+    () => dataPostSuccess(),
+    () => dataPostError(),
+    new FormData(evt.target),
+  );
+};
 
 //Функция открытия редактора фото
 
-function openPhotoEditing() {
+const openPhotoEditing = () => {
   imgUploadOverlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
   document.addEventListener('keydown',onPhotoEditingEscKeydown);
@@ -104,11 +111,11 @@ function openPhotoEditing() {
   controlSmaller.addEventListener('click', onSmallerImg);
   imgUploadForm.addEventListener('submit', onFormSubmit);
   getHideSlider();
-}
+};
 
 //Функция закрытия редактора фото
 
-function closePhotoEditing() {
+function closePhotoEditing  ()  {
   imgUploadOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   imgUploadForm.reset();
@@ -128,15 +135,5 @@ imgUploadInput.addEventListener('change',() => {
   const file = imgUploadInput.files[0];
   preview.src = URL.createObjectURL(file);
 });
-
-function onFormSubmit(evt) {
-  evt.preventDefault();
-
-  sendData(
-    () => dataPostSuccess(),
-    () => dataPostError(),
-    new FormData(evt.target),
-  );
-}
 
 export {closePhotoEditing};

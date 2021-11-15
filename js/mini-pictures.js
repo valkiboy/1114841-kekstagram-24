@@ -9,7 +9,7 @@ const miniPictures = document.querySelector('.pictures');
 // Создаю галерею из маленьких фото и жду клика для пересылания url кликнутой фото в функцию
 // для открытия полноразмерного фото
 
-function getMiniPictures(data) {
+const getMiniPictures = (data) => {
 
   const miniPictureFragment = document.createDocumentFragment();
 
@@ -29,6 +29,6 @@ function getMiniPictures(data) {
     });
   });
   miniPictures.appendChild(miniPictureFragment);
-}
+};
 
 export {getMiniPictures};

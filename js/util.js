@@ -6,7 +6,7 @@ const successPopup = document.querySelector('#success');
 const errorPopup = document.querySelector('#error');
 const body = document.querySelector('body');
 
-function getRandomIntInclusive(min, max) {
+const getRandomIntInclusive = (min, max) => {
 
   if (min >= max || min < 0 || max < 0) {
     return false;
@@ -15,89 +15,89 @@ function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min; //Максимум и минимум включаются
-}
+};
 
-function checkMaxStringLength(verifiedString, maxLine) {
+const checkMaxStringLength = (verifiedString, maxLine) => {
 
   if (verifiedString.length <= maxLine) {
     return true;
   }
 
   return false;
-}
+};
 
-function isEscapeKey(evt) {
+const isEscapeKey = (evt) => {
   if (evt.key === 'Escape') {
     return true;
   }
-}
+};
 
-function showAlert(message) {
-  const alertContainer = document.createElement('div');
-  alertContainer.style.zIndex = 100;
-  alertContainer.style.position = 'absolute';
-  alertContainer.style.left = 0;
-  alertContainer.style.top = 0;
-  alertContainer.style.right = 0;
-  alertContainer.style.padding = '10px 3px';
-  alertContainer.style.fontSize = '30px';
-  alertContainer.style.textAlign = 'center';
-  alertContainer.style.backgroundColor = 'red';
+const showAlert = (message) => {
+  const errorNotification = document.createElement('div');
+  errorNotification.style.zIndex = '100';
+  errorNotification.style.position = 'absolute';
+  errorNotification.style.left = '0';
+  errorNotification.style.top = '0';
+  errorNotification.style.right = '0';
+  errorNotification.style.padding = '10px 3px';
+  errorNotification.style.fontSize = '30px';
+  errorNotification.style.textAlign = 'center';
+  errorNotification.style.backgroundColor = 'red';
 
-  alertContainer.textContent = message;
+  errorNotification.textContent = message;
 
-  document.body.append(alertContainer);
+  document.body.append(errorNotification);
 
   setTimeout(() => {
-    alertContainer.remove();
+    errorNotification.remove();
   }, ALERT_SHOW_TIME);
-}
+};
 
-function onSuccessEscKeydown(evt) {
+const onSuccessEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     document.querySelector('.success').remove();
   }
-}
+};
 
-function onSuccessPopupClose(evt) {
+const onSuccessPopupClose = (evt) => {
   if (!evt.target.closest('.success__inner') || evt.target.getAttribute('type') === 'button') {
     document.querySelector('.success').remove();
     document.removeEventListener('keydown', onSuccessEscKeydown);
   }
-}
+};
 
-function dataPostSuccess() {
+const dataPostSuccess = () => {
   const templateItem = successPopup.content.cloneNode(true);
   body.append(templateItem);
   document.querySelector('.success').addEventListener('click', onSuccessPopupClose);
   document.addEventListener('keydown', onSuccessEscKeydown);
   closePhotoEditing();
-}
+};
 
-function onErrorEscKeydown(evt) {
+const onErrorEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     document.querySelector('.error').remove();
   }
-}
+};
 
-function onErrorPopupClose(evt) {
+const onErrorPopupClose = (evt) => {
   if (!evt.target.closest('.error__inner') || evt.target.getAttribute('type') === 'button') {
     document.querySelector('.error').remove();
     document.removeEventListener('keydown', onErrorEscKeydown);
   }
-}
+};
 
-function dataPostError() {
+const dataPostError = () => {
   const templateItem = errorPopup.content.cloneNode(true);
   body.append(templateItem);
   document.querySelector('.error').addEventListener('click', onErrorPopupClose);
   document.addEventListener('keydown', onErrorEscKeydown);
   closePhotoEditing();
-}
+};
 
-function shuffle(items) {
+const shuffle = (items) => {
   let currentIndex = items.length, temporaryValue, randomIndex;
 
   while (0 !== currentIndex) {
@@ -111,19 +111,19 @@ function shuffle(items) {
   }
 
   return items;
-}
+};
 
-function erasePhotos() {
+const erasePhotos = () => {
   const pictureElem = document.querySelectorAll('.picture');
   pictureElem.forEach((elem) => {
     elem.remove();
   });
-}
+};
 
-function getSort(a, b) {
+const getSort = (a, b) => {
   a = a.comments.length;
   b = b.comments.length;
   return b-a;
-}
+};
 
 export {getRandomIntInclusive, isEscapeKey, checkMaxStringLength, showAlert, dataPostSuccess, dataPostError, shuffle, erasePhotos, getSort};

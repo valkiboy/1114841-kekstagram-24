@@ -9,15 +9,23 @@ const previewImg = document.querySelector('.img-upload__preview img');
 
 // Константы для изменеия эффектов
 
-const sliderElement = document.querySelector('.effect-level__slider');
+const effectLevelSlider = document.querySelector('.effect-level__slider');
 const effectLevelValue = document.querySelector('.effect-level__value');
 const effectsList = document.querySelector('.effects__list');
 
 let controlValue = scaleControlValue.value;
 
+const getScalePhoto = (value) => {
+  if (value >= 100) {
+    previewImg.style.transform = 'scale(1.0)';
+  } else {
+    previewImg.style.transform = `scale(0.${value})`;
+  }
+};
+
 //Функция увеличения фото
 
-function getBiggerImg() {
+const getBiggerImg = () => {
   if (controlValue < SCALE_CONTROL_MAX) {
     controlValue = controlValue + SCALE_CONTROL_STEP;
     getScalePhoto (controlValue);
@@ -25,11 +33,11 @@ function getBiggerImg() {
   } else {
     controlValue = SCALE_CONTROL_MAX;
   }
-}
+};
 
 // Функция уменьшения фото
 
-function getSmallerImg() {
+const getSmallerImg = () => {
   if (controlValue > SCALE_CONTROL_MIN) {
     controlValue = controlValue - SCALE_CONTROL_STEP;
     getScalePhoto (controlValue);
@@ -37,32 +45,17 @@ function getSmallerImg() {
   } else {
     controlValue = SCALE_CONTROL_MIN;
   }
-}
+};
 
-function getScalePhoto(value) {
-  if (value >= 100) {
-    previewImg.style.transform = 'scale(1.0)';
-  } else {
-    previewImg.style.transform = `scale(0.${value})`;
-  }
-}
-
-function onSmallerImg() {
+const onSmallerImg = () => {
   getSmallerImg();
-}
+};
 
-function onBiggerImg() {
+const onBiggerImg = () => {
   getBiggerImg();
-}
+};
 
-effectsList.addEventListener('click',(evt) => {
-  if (evt.target.closest('.effects__item')) {
-    const pictureEffect = evt.target.closest('.effects__item').querySelector('.effects__radio').id;
-    getChangePhoto(pictureEffect);
-  }
-});
-
-noUiSlider.create(sliderElement, {
+noUiSlider.create(effectLevelSlider, {
   range: {
     min: 0,
     max: 100,
@@ -71,27 +64,27 @@ noUiSlider.create(sliderElement, {
   step: 10,
 });
 
-function checkSlider(effect, symbol = '') {
-  sliderElement.noUiSlider.on('update', (value, handle) => {
+const checkSlider = (effect, symbol = '') => {
+  effectLevelSlider.noUiSlider.on('update', (value, handle) => {
     effectLevelValue.value = value[handle];
     previewImg.style.filter = `${effect}(${value[handle]}${symbol})`;
   });
-}
+};
 
-function getChangePhoto(item) {
+const getChangePhoto = (item) => {
 
   if ('effect-none' === item) {
     previewImg.className = 'effects__preview--none';
     previewImg.style.filter = '';
-    sliderElement.style.display = 'none';
+    effectLevelSlider.style.display = 'none';
 
   }
 
   if ('effect-chrome' === item) {
     previewImg.className = 'effects__preview--chrome';
-    sliderElement.style.display = 'block';
+    effectLevelSlider.style.display = 'block';
 
-    sliderElement.noUiSlider.updateOptions({
+    effectLevelSlider.noUiSlider.updateOptions({
       range: {
         min: 0,
         max: 1,
@@ -104,9 +97,9 @@ function getChangePhoto(item) {
 
   if ('effect-sepia' === item) {
     previewImg.className = 'effects__preview--sepia';
-    sliderElement.style.display = 'block';
+    effectLevelSlider.style.display = 'block';
 
-    sliderElement.noUiSlider.updateOptions({
+    effectLevelSlider.noUiSlider.updateOptions({
       range: {
         min: 0,
         max: 1,
@@ -119,9 +112,9 @@ function getChangePhoto(item) {
 
   if ('effect-marvin' === item) {
     previewImg.className = 'effects__preview--marvin';
-    sliderElement.style.display = 'block';
+    effectLevelSlider.style.display = 'block';
 
-    sliderElement.noUiSlider.updateOptions({
+    effectLevelSlider.noUiSlider.updateOptions({
       range: {
         min: 0,
         max: 100,
@@ -134,9 +127,9 @@ function getChangePhoto(item) {
 
   if ('effect-phobos' === item) {
     previewImg.className = 'effects__preview--phobos';
-    sliderElement.style.display = 'block';
+    effectLevelSlider.style.display = 'block';
 
-    sliderElement.noUiSlider.updateOptions({
+    effectLevelSlider.noUiSlider.updateOptions({
       range: {
         min: 0,
         max: 3,
@@ -149,9 +142,9 @@ function getChangePhoto(item) {
 
   if ('effect-heat' === item) {
     previewImg.className = 'effects__preview--heat';
-    sliderElement.style.display = 'block';
+    effectLevelSlider.style.display = 'block';
 
-    sliderElement.noUiSlider.updateOptions({
+    effectLevelSlider.noUiSlider.updateOptions({
       range: {
         min: 1,
         max: 3,
@@ -161,18 +154,26 @@ function getChangePhoto(item) {
     });
     checkSlider('brightness');
   }
-}
+};
 
-function resetPhotoEffect() {
+effectsList.addEventListener('click',(evt) => {
+  if (evt.target.closest('.effects__item')) {
+    const pictureEffect = evt.target.closest('.effects__item').querySelector('.effects__radio').id;
+    getChangePhoto(pictureEffect);
+  }
+});
+
+
+const resetPhotoEffect = () => {
   previewImg.style.transform = 'scale(1.0)';
   controlValue = '100';
   previewImg.className = '';
   previewImg.style.filter = '';
-}
+};
 
-function getHideSlider() {
-  sliderElement.style.display = 'none';
+const getHideSlider = () => {
+  effectLevelSlider.style.display = 'none';
   scaleControlValue.value = `${controlValue}%`;
-}
+};
 
 export {onSmallerImg, onBiggerImg, resetPhotoEffect, getHideSlider};

@@ -1,6 +1,6 @@
 import {showAlert} from './util.js';
 
-function getData(onSuccess) {
+const getData = (onSuccess) => {
   fetch('https://24.javascript.pages.academy/kekstagram/data')
     .then((response) => {
       if (response.ok) {
@@ -15,9 +15,9 @@ function getData(onSuccess) {
     .then((data) => {
       onSuccess(data);
     });
-}
+};
 
-function sendData(onSuccess, onError, body) {
+const sendData = (onSuccess, onError, body) => {
   fetch(
     'https://24.javascript.pages.academy/kekstagram',
     {
@@ -35,6 +35,6 @@ function sendData(onSuccess, onError, body) {
     .catch(() => {
       onError();
     });
-}
+};
 
 export {getData, sendData};

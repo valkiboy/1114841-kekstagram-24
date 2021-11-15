@@ -12,38 +12,38 @@ const socialComment = bigPicture.querySelector('.social__comment');
 const commentCurrentCount = bigPicture.querySelector('.comments-current-count');
 const commentLoaderButton = bigPicture.querySelector('.social__comments-loader');
 
-function getBigPicture(item, data) {
+const getBigPicture = (item, data) =>{
 
   let pageNum = 0;
   let postData;
 
   //Функция для закрытия полноразмерного фото при нажатии клавиши ESCAPE
 
-  function onBigPictureEscKeydown(evt)  {
+  const onBigPictureEscKeydown = (evt) => {
     if (isEscapeKey(evt)) {
       evt.preventDefault();
       closeBigPictureModal ();
     }
-  }
+  };
 
   //Функция  для закрытия полноразмерного фото при нажатии на кнопк закрытия (крестик)
 
-  function onCloseButtonClick() {
+  const onCloseButtonClick = () => {
     closeBigPictureModal();
-  }
+  };
 
   //Функция открытия полноразмерного фото и добавления ЭвентЛисенеров для кнопки закрытия и ESCAPE
 
-  function openBigPictureModal() {
+  const openBigPictureModal = () => {
     bigPicture.classList.remove('hidden');
     document.body.classList.add('modal-open');
     document.addEventListener('keydown',onBigPictureEscKeydown);
     bigPictureCancel.addEventListener('click',onCloseButtonClick);
-  }
+  };
 
   //Функция создания списка комментариев
 
-  function showComments(commentsList) {
+  const showComments = (commentsList) => {
     const commentsFragment = document.createDocumentFragment();
     commentsList.forEach((currentComment) => {
       const socialCommentCopy = socialComment.cloneNode(true);
@@ -63,23 +63,23 @@ function getBigPicture(item, data) {
     } else {
       commentLoaderButton.classList.remove('hidden');
     }
-  }
+  };
 
   //Функция показа определенного количества комментариев (по 5 штук)
 
-  function getComments() {
+  const getComments = () => {
     const start = pageNum * COMMENT_ON_PAGE;
     const end = start + COMMENT_ON_PAGE;
     const commentsList = postData.comments.slice(start, end);
     showComments(commentsList);
-  }
+  };
 
   // Функция показывает следующие 5 комментариев
 
-  function onGetNewComments() {
+  const onGetNewComments = () => {
     pageNum++;
     getComments();
-  }
+  };
 
   //Функция закрытия полноразмерного фото и удаления ЭвентЛисенеров для кнопки закрытия и ESCAPE
 
@@ -110,6 +110,6 @@ function getBigPicture(item, data) {
       openBigPictureModal();
     }
   });
-}
+};
 
 export {getBigPicture};

@@ -10,26 +10,24 @@ const filterRandom = document.getElementById('filter-random');
 const filterDiscussed = document.getElementById('filter-discussed');
 let newData;
 
-getData (getPhotoFiltering);
-
-function getPhotoFiltering (data) {
+const getPhotoFiltering = (data) => {
 
   imgFilters.classList.remove('img-filters--inactive');
   getData(getMiniPictures);
 
-  function getDefault() {
+  const getDefault = () => {
     filterDefault.classList.add('img-filters__button--active');
     filterRandom.classList.remove('img-filters__button--active');
     filterDiscussed.classList.remove('img-filters__button--active');
     erasePhotos();
     getData(getMiniPictures);
-  }
+  };
 
-  function onDefault() {
+  const onDefault = () => {
     getDefault();
-  }
+  };
 
-  function getRandom() {
+  const getRandom = () => {
     erasePhotos();
     newData = shuffle(data);
     newData = newData.slice(0, MAX_RANDOM_PHOTO);
@@ -37,26 +35,28 @@ function getPhotoFiltering (data) {
     filterDefault.classList.remove('img-filters__button--active');
     filterRandom.classList.add('img-filters__button--active');
     filterDiscussed.classList.remove('img-filters__button--active');
-  }
+  };
 
-  function onRandom() {
+  const onRandom = () => {
     getRandom();
-  }
+  };
 
-  function getDiscussed() {
+  const getDiscussed = () => {
     erasePhotos();
     data.sort(getSort);
     getMiniPictures(data);
     filterDefault.classList.remove('img-filters__button--active');
     filterRandom.classList.remove('img-filters__button--active');
     filterDiscussed.classList.add('img-filters__button--active');
-  }
+  };
 
-  function onDiscussed() {
+  const onDiscussed = () => {
     getDiscussed();
-  }
+  };
 
   filterDefault.addEventListener('click', debounce(onDefault));
   filterRandom.addEventListener('click',debounce(onRandom));
   filterDiscussed.addEventListener('click',debounce(onDiscussed));
-}
+};
+
+getData (getPhotoFiltering);
