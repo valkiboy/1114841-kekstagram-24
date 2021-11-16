@@ -113,7 +113,7 @@ const openPhotoEditing = () => {
   getHideSlider();
 };
 
-//Функция закрытия редактора фото
+//Функция закрытия редактора фото. Объявлена декларативно что бы не было конфликта.
 
 function closePhotoEditing  ()  {
   imgUploadOverlay.classList.add('hidden');

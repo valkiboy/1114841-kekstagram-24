@@ -81,7 +81,7 @@ const getBigPicture = (item, data) =>{
     getComments();
   };
 
-  //Функция закрытия полноразмерного фото и удаления ЭвентЛисенеров для кнопки закрытия и ESCAPE
+  //Функция закрытия полноразмерного фото и удаления ЭвентЛисенеров для кнопки закрытия и ESCAPE.Объявлена декларативно что бы не было конфликта.
 
   function closeBigPictureModal() {
     bigPicture.classList.add('hidden');
